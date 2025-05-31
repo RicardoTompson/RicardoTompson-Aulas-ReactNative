@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Groq</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      #chat-container {
+        width: 400px;
+        text-align: center;
+      }
+      #message {
+        width: 100%;
+        padding: 8px;
+      }
+      button {
+        padding: 8px 16px;
+        margin-top: 10px;
+      }
+      #response {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat-container">
+      <h2>Solicite uma piada para alegrar seu dia 😜</h2>
+      <input type="text" id="message" placeholder="Digite sua mensagem" />
+      <button onclick="sendMessage()">Enviar</button>
+      <div id="response"></div>
+    </div>
+
+    <script>
+      async function sendMessage() {
+        const message = document.getElementById("message").value;
+
+        if (!message) {
+          alert("Por favor, digite uma mensagem!");
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message }),
+          });
+
+          const data = await response.json();
+          document.getElementById("response").innerText =
+            data.response || "Erro ao obter resposta";
+        } catch (error) {
+          document.getElementById("response").innerText =
+            "Erro ao conectar-se ao servidor";
+        }
+      }
+    </script>
+  </body>
+</html>
