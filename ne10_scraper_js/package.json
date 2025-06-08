@@ -1,0 +1,14 @@
+{
+  "name": "ne10-scraper-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "nodemailer": "^6.9.1"
+  }
+}
